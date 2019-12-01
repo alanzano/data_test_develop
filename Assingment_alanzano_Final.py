@@ -69,7 +69,7 @@ data = urllib2.urlopen('http://syndication.enterprise.websiteidx.com/feeds/BoojC
 #Should the user wish to alter the code for another XML file or for differenet parameters, make changes to the next section:
 
 #####################
-#For universal applicability chage the following variables:START
+#Make Changes: START
 #####################
 
 #Define list which contains tags that require a single response
@@ -103,7 +103,7 @@ Final_header = ['MlsId', 'MlsName', 'DateListed', 'StreetAddress', 'Price', 'Bed
                      'HalfBathrooms', 'ThreeQuarterBathrooms', 'Appliances', 'Rooms', 'Description']
 
 #####################
-#For universal applicability chage the following variables:STOP
+#Make Changes: STOP
 #####################
 
 #parsing data from source
@@ -128,7 +128,7 @@ for Listing in root:
         if result == [] or result == None: #Conditional statement filtering unacceptable entries and replacing them with blanks 
             result = ''
         else:
-            result = ','.join(result)
+            result = ','.join(result) #joins multiple text via commas 
         To_CSV.append(result)
     
     To_CSV = [To_CSV[i] for i in list_order] #orders list with desired header order
