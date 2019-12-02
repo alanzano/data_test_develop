@@ -2,7 +2,7 @@
 #Code Summary:
 #This code is designed to extract XML data directly from the source and identify tags that are relevant to 
 #the user. The code does this by sending each 'Listing' tag through a function which identifies tags 
-#the user is seeking and returns the relevant text. This data is stored in a single list per 'Listing' tag
+#the user is seeking and returns the relevant text. This data is stored in a single list,
 #which refreshes for each 'Listing'. This list is then appended to a maseter 'Final' list if it meets the 
 #requirements of the assignment. Additional cleaning and filtering is done to make the data more acceptable 
 #to the user and is then exported to the CSV file titled 'Output.csv'
@@ -34,15 +34,6 @@ def FilterData_Single(Listing, item):
                             else:
                                 pass
 
-#Function used to return multiple elements for identified tag                    
-def itering(Itemized, Listing):
-    try:
-        for a in Listing.find(item).iter('*'):
-            Itemized.append(a.text)
-        return Itemized[1:]
-    except:
-        pass
-
 #Function used to filter tags for elements which require multiple responses    
 def FilterData_Multi(Listing, item):
     Itemized = []
@@ -62,6 +53,15 @@ def FilterData_Multi(Listing, item):
                                 return itering(Itemized, i)
                             else:
                                 pass
+                            
+#Function used to return multiple elements for identified tag                    
+def itering(Itemized, Listing):
+    try:
+        for a in Listing.find(item).iter('*'):
+            Itemized.append(a.text)
+        return Itemized[1:]
+    except:
+        pass
 
 #Fetch data from source                            
 data = urllib2.urlopen('http://syndication.enterprise.websiteidx.com/feeds/BoojCodeTest.xml')
@@ -88,8 +88,7 @@ Single_item_list = ['MlsId', \
 Multi_item_list = ['Appliances', \
                    'Rooms']
 
-#Define header order for output to csv file
-list_order = [0,1,2,3,4,5,6,7,8,10,11,9]
+list_order = [0,1,2,3,4,5,6,7,8,10,11,9] #Define header order for output to csv file
 Desc_index = 11 #identify list index where 'description' is located
 Date_index = 2 #identify list index where 'date' is located
 
